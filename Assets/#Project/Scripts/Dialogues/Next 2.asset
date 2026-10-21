@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37448edb7d0d9214398fc8687965921d, type: 3}
   m_Name: Next 2
   m_EditorClassIdentifier: Assembly-CSharp::Dialogues
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: a7794d13183f7eb49bbbee22fb5e0c2d, type: 3}
   <Text>k__BackingField: "De tout mani\xE8re je n'ai plus rien \xE0 montrer"
   <Prompts>k__BackingField: []
-  <NextDialogues>k__BackingField: []
+  <NextDialogs>k__BackingField: []

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37448edb7d0d9214398fc8687965921d, type: 3}
   m_Name: Question
   m_EditorClassIdentifier: Assembly-CSharp::Dialogues
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 46c5c6fc396c34846b0643f877461188, type: 3}
   <Text>k__BackingField: Voulez-vous continuez?
   <Prompts>k__BackingField:
   - Oui

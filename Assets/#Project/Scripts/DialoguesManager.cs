@@ -6,22 +6,44 @@ using UnityEngine.UI;
 public class DialoguesManager : MonoBehaviour
 {
     private const string DEFAULT_ANSWER = "Suivant";
+    private const string DEFAULT_END_DIALOG = "Fin";
     [SerializeField] private Dialog firstDialog;
+    [SerializeField] private Image image;
     [SerializeField] private TMP_Text text;
     [SerializeField] private Button[] buttons;
     private Dialog currentDialog;
 
 
-    public void Start()
-    {
-        LoadDialog(firstDialog);
 
+    private void OnEnable()
+    {
+        Active();
+        LoadDialog(firstDialog);
     }
+
+    private void OnDisable()
+    {
+        Deactive();
+    }
+
+    private void SetActive(bool ok)
+    {
+        text.gameObject.SetActive(ok);
+        image.gameObject.SetActive(ok);
+        for (int index = 0; index < buttons.Length; index++)
+        {
+            buttons[index].gameObject.SetActive(ok);
+        }
+    }
+
+    private void Active() => SetActive(true);
+    private void Deactive() => SetActive(false);
 
     public void LoadDialog(Dialog dialog)
     {
         currentDialog = dialog;
         text.text = dialog.Text;
+        image.sprite = dialog.Image;
         if (currentDialog.Prompts.Length > 0)
         {
 
@@ -40,7 +62,7 @@ public class DialoguesManager : MonoBehaviour
         }
         else
         {
-            UpdateButton(buttons[0], 0, DEFAULT_ANSWER);
+            UpdateButton(buttons[0], 0, currentDialog.NextDialogs.Length > 0 ? DEFAULT_ANSWER : DEFAULT_END_DIALOG);
             for (int index = 1; index < buttons.Length; index++)
             {
                 buttons[index].gameObject.SetActive(false);
@@ -49,8 +71,18 @@ public class DialoguesManager : MonoBehaviour
 
     }
 
+    public void LoadDialog(int index)
+    {
+        if (index < currentDialog.NextDialogs.Length)
+        {
+            LoadDialog(currentDialog.NextDialogs[index]);
+        }
+        else
+        {
+            enabled = false;
+        }
+    }
     public void UpdateButton(int index) => UpdateButton(buttons[index], index, currentDialog.Prompts[index]);
-
 
     public void UpdateButton(Button button, int index, string text)
     {
